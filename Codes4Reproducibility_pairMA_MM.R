@@ -1,5 +1,5 @@
 # R code for replicating the dataset and the analyses in the paper #
-# Pharmacological treatments for ADHD comorbid with substance use disorder: a systematic review and network meta-analysis #
+# Pharmacological treatments for ADHD and comorbid substance use disorder: a systematic review and network meta-analysis #
 # R code by Mattia Marchi (mattiamarchimd@gmail.com) 
 # April 28, 2025
 
@@ -26,7 +26,6 @@ adhd_r <- structure(list(ID = c("Levin et al. 2006", "Levin et al. 2007", "Levin
 pw1 <- metabin(event.e = n_adhdR_1, n.e = n1, event.c = n_adhdR_2, n.c = n2,
                studlab = ID, data = adhd_r, sm = "OR")
 pw1
-#NNT - to be checked
 #forestplot
 forest(pw1, layout = "RevMan5", digits.sd = 2, random = T, fixed = F,
        label.e = "Active drug", label.c = "Placebo",
