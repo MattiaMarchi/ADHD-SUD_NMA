@@ -1,7 +1,7 @@
 # R code for replicating the dataset and the analyses in the paper #
 # Pharmacological treatments for ADHD and comorbid substance use disorder: a systematic review and network meta-analysis #
 # R code by Mattia Marchi (mattiamarchimd@gmail.com) 
-# April 28, 2025
+# December 2, 2025
 
 ###--------------------------------------------------------------------------------------###
 ###-------------------------Pairwise Meta-Analysis ADHD-SUD------------------------------###
