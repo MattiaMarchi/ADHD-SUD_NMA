@@ -1,24 +1,25 @@
 # R code for replicating the dataset and the analyses in the paper #
-# Pharmacological treatments for ADHD and comorbid substance use disorder: a systematic review and network meta-analysis #
+# Pharmacological treatments for ADHD comorbid with substance use disorder: a systematic review and network meta-analysis #
 # R code by Mattia Marchi (mattiamarchimd@gmail.com) 
-# December 2, 2025
+# August 17, 2026
 
 #----------------------------1. NMA ADHD treatment response--------------------------------#
-adhd_r <- structure(list(ID = c("Levin et al. 2006", "Levin et al. 2006", "Levin et al. 2006", "Levin et al. 2007", "Levin et al. 2007", "Levin et al. 2015", "Levin et al. 2015", "Levin et al. 2024", "Levin et al. 2024", "Riggs et al. 2004", "Riggs et al. 2004", 
-                                "Riggs et al. 2011", "Riggs et al. 2011", "Schubiner et al. 2002", "Schubiner et al. 2002", "Thurstone et al. 2010", "Thurstone et al. 2010"),
-                         t = c("MPH", "BPR", "PBO", "MPH", "PBO", "AMPH", "PBO", "AMPH", "PBO", "PEM", "PBO", "MPH", "PBO", "MPH", "PBO", "ATO", "PBO"),
-                         n = c(32L, 33L, 33L, 53L, 53L, 83L, 43L, 12L, 15L, 35L, 34L, 151L, 152L, 24L, 24L, 35L, 35L), r = c(11L, 16L, 15L, 25L, 29L, 31L, 5L, 10L, 10L, 11L, 4L, 39L, 35L, 18L, 5L, 17L, 20L),
-                         Time = c("12 weeks", "12 weeks", "12 weeks", "14 weeks", "14 weeks", "13 weeks", "13 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks"),
-                         Measure = c("CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", 
-                                     "CGI - CGI ADHD improvement rating <2 at end of study", "CGI - CGI ADHD improvement rating <2 at end of study", "AISRS - <30% than baseline", "AISRS - <30% than baseline", "CGI - CGI ADHD improvement rating <3 at end of study", 
-                                     "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study",
-                                     "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study")), class = "data.frame", row.names = c(NA, -17L))
+adhd_r <- structure(list(ID = c("Carpentier et al. 2005", "Carpentier et al. 2005", "Konstenius et al. 2014", "Konstenius et al. 2014", "Levin et al. 2006", "Levin et al. 2006", "Levin et al. 2006", "Levin et al. 2007", "Levin et al. 2007", "Levin et al. 2015", "Levin et al. 2015", "Levin et al. 2024", "Levin et al. 2024", "Riggs et al. 2004", 
+                                "Riggs et al. 2004", "Riggs et al. 2011", "Riggs et al. 2011", "Schubiner et al. 2002", "Schubiner et al. 2002", "Thurstone et al. 2010", "Thurstone et al. 2010"),
+                         t = c("Methylphenidate", "Placebo", "Methylphenidate", "Placebo", "Methylphenidate", "Bupropion", "Placebo", "Methylphenidate", "Placebo", "Amphetamine", "Placebo", "Amphetamine", "Placebo", "Pemoline", "Placebo", "Methylphenidate", 
+                               "Placebo", "Methylphenidate", "Placebo", "Atomoxetine", "Placebo"), t_short = c("MPH", "PBO", "MPH", "PBO", "MPH", "BPR", "PBO", "MPH", "PBO", "AMPH", "PBO", "AMPH", "PBO", "PEM", "PBO", "MPH", "PBO", "MPH", "PBO", "ATO", "PBO"),
+                         n = c(25L, 25L, 27L, 27L, 32L, 33L, 33L, 53L, 53L, 83L, 43L, 12L, 15L, 35L, 34L, 151L, 152L, 24L, 24L, 35L, 35L),
+                         r = c(9L, 5L, 17L, 7L, 11L, 16L, 15L, 25L, 29L, 31L, 5L, 10L, 10L, 11L, 4L, 39L, 35L, 18L, 5L, 17L, 20L),
+                         Time = c("8 weeks", "8 weeks", "24 weeks", "24 weeks", "12 weeks", "12 weeks", "12 weeks", "14 weeks", "14 weeks", "13 weeks", "13 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks"), 
+                         Measure = c("ADHD-RS - <30% rispetto basline", "ADHD-RS - <30% rispetto basline", "CAARS - <30% rispetto basline", "CAARS - <30% rispetto basline", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", 
+                                     "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <2 at end of study", "CGI - CGI ADHD improvement rating <2 at end of study", "AISRS - <30% than baseline", "AISRS - <30% than baseline", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", 
+                                     "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study", "CGI - CGI ADHD improvement rating <3 at end of study")), class = "data.frame", row.names = c(NA, -21L))
 #Organize data/calculate pairwise comparisons
 pw1 <- pairwise(treat = t, n = n, event = r,
                 studlab = ID, data = adhd_r, sm = "OR")
 #Perform standard NMA
 net1 <- netmeta(TE, seTE, treat1, treat2, studlab, data = pw1,
-                common = FALSE, ref = "PBO")
+                common = FALSE, ref = "Pl")
 dep_net <- netgraph(net1, plastic = FALSE, multiarm = FALSE, points = TRUE, seq = "optimal",
                     cex.points = table(adhd_r$t)*2, col = 1, number.of.studies = TRUE,
                     pos.number.of.studies = 0.5)
@@ -27,7 +28,7 @@ forest(net1, label.left = "Favours placebo", label.right = "Favours active drug"
        smlab = "Odds Ratio
        Random, 95% CI")
 #To make all the contrasts
-plot(net1, ref = c("AMPH", "ATO", "BPR", "MPH", "PEM", "PBO"))
+plot(net1, ref = c("Am", "At", "Bu", "Me", "Pe", "Pl"))
 #Ranking treatments
 netrank(net1, small.values = "bad")
 set.seed(1909)
@@ -41,16 +42,17 @@ decomp.design(net1)
 netsplit(net1)
 
 #--------------------------------2. NMA ADHD symptoms cont.----------------------------------#
-adhd_cont <- structure(list(ID = c("Levin et al. 2015", "Levin et al. 2015", "Levin et al. 2024", "Levin et al. 2024", "McRae-Clark et al. 2010", "McRae-Clark et al. 2010", "Riggs et al. 2011", "Riggs et al. 2011", 
-                                   "Thurstone et al. 2010", "Thurstone et al. 2010", "Wilens et al.2008", "Wilens et al.2008"), t1 = c("AMPH", "PBO", "AMPH", "PBO", "ATO", "PBO", "MPH", "PBO", "ATO", "PBO", "ATO", "PBO"),
-                            n = c(83L, 43L, 13L, 15L, 24L, 22L, 151L, 152L, 35L, 35L, 72L, 75L), mean = c(18.07, 25.78, -19.25, -15.79, 2.63, 3.26, 20, 19.4, -18.19, -19.02, -13.6, -8.3), sd = c(13.79, 13.94, 10.97, 9.94, 0.68, 0.93, 11.91, 11.95, 14.4, 15.2, 11.4, 11.4),
-                            Scale = c("AISRS", "AISRS", "AISRS change (from baseline)", "AISRS change (from baseline)", "CGI-improvement", "CGI-improvement", "ADHD-RS", "ADHD-RS", "ADHD-RS change (pre-post=18.19)", "ADHD-RS change (pre-post=19.2)", "AISRS change (from baseline= -13.6)", "AISRS change (from baseline= -8.3)"),
-                            Time = c("13 weeks", "13 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks")), row.names = c(NA, -12L), class = "data.frame")
+adhd_cont <- structure(list(ID = c("Konstenius et al. 2010", "Konstenius et al. 2010", "Levin et al. 2015", "Levin et al. 2015", "Levin et al. 2024", "Levin et al. 2024", "McRae-Clark et al. 2010", "McRae-Clark et al. 2010", "Riggs et al. 2011", "Riggs et al. 2011", "Thurstone et al. 2010", "Thurstone et al. 2010", "Wilens et al.2008", "Wilens et al.2008"),
+                            t1 = c("Methylphenidate", "Placebo", "Amphetamine", "Placebo", "Amphetamine", "Placebo", "Atomoxetine", "Placebo", "Methylphenidate", "Placebo", "Atomoxetine", "Placebo", "Atomoxetine", "Placebo"),
+                            t1_short = c("MPH", "PBO", "AMPH", "PBO", "AMPH", "PBO", "ATO", "PBO", "MPH", "PBO", "ATO", "PBO", "ATO", "PBO"),
+                            n = c(12L, 12L, 83L, 43L, 13L, 15L, 24L, 22L, 151L, 152L, 35L, 35L, 72L, 75L), mean = c(59.5, 58.3, 18.07, 25.78, -19.25, -15.79, 2.63, 3.26, 20, 19.4, -18.19, -19.02, -13.6, -8.3), sd = c(13, 11.8, 13.79, 13.94, 10.97, 9.94, 0.68, 0.93, 11.91, 11.95, 14.4, 15.2, 11.4, 11.4),
+                            Scale = c("CAARS", "CAARS", "AISRS", "AISRS", "AISRS change (from baseline)", "AISRS change (from baseline)", "CGI-improvement", "CGI-improvement", "ADHD-RS", "ADHD-RS", "ADHD-RS change (pre-post=18.19)", "ADHD-RS change (pre-post=19.2)", "AISRS change (from baseline= -13.6)", "AISRS change (from baseline= -8.3)"),
+                            Time = c("12 weeks", "12 weeks", "13 weeks", "13 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks")), row.names = c(NA, -14L), class = "data.frame")
 #Organize data/calculate pairwise comparisons
 pw2 <- pairwise(treat = t1, n = n, mean = mean, sd = sd,
                 studlab = ID, data = adhd_cont, sm = "SMD")
 net2 <- netmeta(TE, seTE, treat1, treat2, studlab, data = pw2,
-                common = FALSE, ref = "PBO")
+                common = FALSE, ref = "Pl")
 anx_net <- netgraph(net2, plastic = FALSE, multiarm = FALSE, points = TRUE, seq = "optimal",
                     cex.points = table(adhd_cont$t1)*2, col = 1, number.of.studies = TRUE,
                     pos.number.of.studies = 0.5)
@@ -60,7 +62,7 @@ forest(net2, label.left = "Favours active drug", label.right = "Favours placebo"
        Random, 95% CI")
 plot(net2)
 #To make all the contrasts
-plot(net2, ref = c("AMPH", "ATO", "MPH", "PBO"))
+plot(net2, ref = c("Am", "At", "Me", "Pl"))
 #Ranking treatments
 netrank(net2, small.values = "good")
 set.seed(1909)
@@ -170,12 +172,13 @@ decomp.design(net8)
 netsplit(net8)
 
 #---------------------------------6. NMA SUD cont.--------------------------------#
-sud_cont <- structure(list(ID = c("Levin et al. 2007", "Levin et al. 2007", "McRae-Clark et al. 2010", "McRae-Clark et al. 2010", "Riggs et al. 2004", "Riggs et al. 2004", "Riggs et al. 2011", "Riggs et al. 2011", 
-                                  "Szobot et al. 2008", "Szobot et al. 2008", "Thurstone et al. 2010", "Thurstone et al. 2010"), t1 = c("MPH", "PBO", "ATO", "PBO", "PEM", "PBO", "MPH", "PBO", "MPH", "PBO", "ATO", "PBO"),
-                           n = c(53L, 53L, 24L, 22L, 35L, 34L, 151L, 152L, 16L, 16L, 35L, 35L), mean = c(0.73, 0.7, 60.1, 68.1, 12.1, 13.7, 8.2, 9.1, 5.56, 6, -5.78, -2.24), sd = c(0.29, 0.29, 31.5, 31.3, 11.3, 11.5, 8.78, 9.12, 2.03, 2.1, 10.4, 10.3),
-                           Time = c("12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "6 weeks", "6 weeks", "12 weeks", "12 weeks"),
-                           Measure = c("week positive any drugs", "week positive any drugs", "%days using any drugs", "%days using any drugs", "days using any drugs", "days using any drugs", "days using any drugs", "days using any drugs", "days using any drugs", "days using any drugs", "days using any drugs - change", "days using any drugs - change")),
-                      row.names = c(NA, -12L), class = "data.frame")
+sud_cont <- structure(list(ID = c("Konstenius et al. 2010", "Konstenius et al. 2010", "Levin et al. 2007", "Levin et al. 2007", "McRae-Clark et al. 2010", "McRae-Clark et al. 2010", "Riggs et al. 2004", "Riggs et al. 2004", 
+                                  "Riggs et al. 2011", "Riggs et al. 2011", "Szobot et al. 2008", "Szobot et al. 2008", "Thurstone et al. 2010", "Thurstone et al. 2010"),
+                           t1 = c("Methylphenidate", "Placebo", "Methylphenidate", "Placebo", "Atomoxetine", "Placebo", "Pemoline", "Placebo", "Methylphenidate", "Placebo", "Methylphenidate", "Placebo", "Atomoxetine", "Placebo"),
+                           t1_short = c("MPH", "PBO", "MPH", "PBO", "ATO", "PBO", "PEM", "PBO", "MPH", "PBO", "MPH", "PBO", "ATO", "PBO"), n = c(12L, 12L, 53L, 53L, 24L, 22L, 35L, 34L, 151L, 152L, 16L, 16L, 35L, 35L),
+                           mean = c(10.6, 8.6, 0.73, 0.7, 60.1, 68.1, 12.1, 13.7, 8.2, 9.1, 5.56, 6, -5.78, -2.24), sd = c(8.8, 7.8, 0.29, 0.29, 31.5, 31.3, 11.3, 11.5, 8.78, 9.12, 2.03, 2.1, 10.4, 10.3),
+                           Time = c("12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "12 weeks", "6 weeks", "6 weeks", "12 weeks", "12 weeks"),
+                           Measure = c("mean number of positive weekly urine tests ~ week positive any drugs", "mean number of positive weekly urine tests ~ week positive any drugs", "week positive any drugs", "week positive any drugs", "%days using any drugs", "%days using any drugs", "days using any drugs", "days using any drugs", "days using any drugs", "days using any drugs", "days using any drugs", "days using any drugs", "days using any drugs - change", "days using any drugs - change")), row.names = c(NA, -14L), class = "data.frame")
 #Organize data/calculate pairwise comparisons
 pw9 <- pairwise(treat = t1, n = n, mean = mean, sd = sd,
                 studlab = ID, data = sud_cont, sm = "SMD")
@@ -240,19 +243,17 @@ decomp.design(net10)
 netsplit(net10)
 
 #--------------------------------------8. NMA Tolerability-------------------------------------#
-tol <- structure(list(ID = c("Levin et al. 2006", "Levin et al. 2006", "Levin et al. 2006", "Levin et al. 2007", "Levin et al. 2007", "Levin et al. 2015", "Levin et al. 2015", "Levin et al. 2024", 
-                             "Levin et al. 2024", "McRae-Clark et al. 2010", "McRae-Clark et al. 2010", "Riggs et al. 2004", "Riggs et al. 2004", "Riggs et al. 2011", "Riggs et al. 2011", "Schubiner et al. 2002", "Schubiner et al. 2002", 
-                             "Szobot et al. 2008", "Szobot et al. 2008", "Thurstone et al. 2010", "Thurstone et al. 2010", "Wilens et al.2008", "Wilens et al.2008"),
-                      t1 = c("MPH", "BPR", "PBO", "MPH", "PBO", "AMPH", "PBO", "AMPH", "PBO", "ATO", "PBO", "PEM", "PBO", "MPH", "PBO", "MPH", "PBO", "MPH", "PBO", "ATO", "PBO", "ATO", "PBO"),
-                      n = c(32L, 33L, 33L, 53L, 53L, 83L, 43L, 13L, 15L, 24L, 22L, 35L, 34L, 151L, 152L, 24L, 24L, 16L, 16L, 35L, 35L, 72L, 75L),
-                      r_doany = c(11L, 10L, 8L, 30L, 29L, 19L, 14L, 3L, 0L, 15L, 15L, 14L, 16L, 33L, 43L, 13L, 10L, 2L, 0L, 3L, 2L, 40L, 27L),
-                      r_doae = c(1L, 3L, 3L, 3L, 4L, 0L, 0L, 1L, 0L, 2L, 2L, 2L, 3L, 1L, 4L, 0L, 1L, 2L, 0L, 1L, 1L, 7L, 2L),
-                      r_ae = c(1L, 0L, 2L, 1L, 1L, 82L, 16L, 13L, 7L, 19L, 16L, 2L, 3L, 4L, 7L, 17L, 19L, 2L, 0L, 4L, 7L, 31L, 7L)),
-                 class = "data.frame", row.names = c(NA, -23L))
+tol <- structure(list(ID = c("Carpentier et al. 2005", "Carpentier et al. 2005", "Konstenius et al. 2010", "Konstenius et al. 2010", "Konstenius et al. 2014", "Konstenius et al. 2014", "Levin et al. 2006", "Levin et al. 2006", "Levin et al. 2006", "Levin et al. 2007", "Levin et al. 2007", "Levin et al. 2015", "Levin et al. 2015", "Levin et al. 2024", "Levin et al. 2024", "McRae-Clark et al. 2010", "McRae-Clark et al. 2010", 
+                             "Riggs et al. 2004", "Riggs et al. 2004", "Riggs et al. 2011", "Riggs et al. 2011", "Schubiner et al. 2002", "Schubiner et al. 2002", "Szobot et al. 2008", "Szobot et al. 2008", "Thurstone et al. 2010", "Thurstone et al. 2010", "Wilens et al.2008", "Wilens et al.2008"),
+                      t1 = c("Methylphenidate", "Placebo", "Methylphenidate", "Placebo", "Methylphenidate", "Placebo", "Methylphenidate", "Bupropion", "Placebo", "Methylphenidate", "Placebo", "Amphetamine", "Placebo", "Amphetamine", "Placebo", "Atomoxetine", "Placebo", "Pemoline", "Placebo", "Methylphenidate", "Placebo", "Methylphenidate", "Placebo", 
+                             "Methylphenidate", "Placebo", "Atomoxetine", "Placebo", "Atomoxetine", "Placebo"), t1_short = c("MPH", "PBO", "MPH", "PBO", "MPH", "PBO", "MPH", "BPR", "PBO", "MPH", "PBO", "AMPH", "PBO", "AMPH", "PBO", "ATO", "PBO", "PEM", "PBO", "MPH", "PBO", "MPH", "PBO", "MPH", "PBO", "ATO", "PBO", "ATO", "PBO"),
+                      n = c(25L, 25L, 12L, 12L, 27L, 27L, 32L, 33L, 33L, 53L, 53L, 83L, 43L, 13L, 15L, 24L, 22L, 35L, 34L, 151L, 152L, 24L, 24L, 16L, 16L, 35L, 35L, 72L, 75L),
+                      r_doany = c(NA, NA, 5L, 2L, 17L, 23L, 11L, 10L, 8L, 30L, 29L, 19L, 14L, 3L, 0L, 15L, 15L, 14L, 16L, 33L, 43L, 13L, 10L, 2L, 0L, 3L, 2L, 40L, 27L), r_doae = c(0L, 1L, 0L, 0L, 0L, 2L, 1L, 3L, 3L, 3L, 4L, 0L, 0L, 1L, 0L, 2L, 2L, 2L, 3L, 1L, 4L, 0L, 1L, 2L, 0L, 1L, 1L, 7L, 2L),
+                      r_ae = c(NA, NA, 2L, 0L, 6L, 2L, 2L, 0L, 2L, 1L, 1L, 82L, 16L, 13L, 7L, 19L, 16L, 2L, 3L, 4L, 7L, 17L, 19L, 2L, 0L, 4L, 7L, 31L, 7L)), class = "data.frame", row.names = c(NA, -29L))
 #----Dropout any cause
 pw3 <- pairwise(treat = t1, n = n, event = r_doany, studlab = ID, data = tol, sm = "OR")
 net3 <- netmeta(TE, seTE, treat1, treat2, studlab, data = pw3,
-                common = FALSE, ref = "PBO")
+                common = FALSE, ref = "Pl")
 anycause_net <- netgraph(net3, plastic = FALSE, multiarm = FALSE, points = TRUE, seq = "optimal",
                          cex.points = table(tol$t1), col = 1, number.of.studies = TRUE,
                          pos.number.of.studies = 0.5)
@@ -262,7 +263,7 @@ forest(net3, label.left = "Favours active drug", label.right = "Favours placebo"
        Random, 95% CI")
 plot(net3)
 #To make all the contrasts
-plot(net3, ref = c("AMPH", "ATO", "BPR", "MPH", "PEM", "PBO"))
+plot(net3, ref = c("Am", "At", "Bu", "Me", "Pe", "Pl"))
 #Ranking treatments
 netrank(net3, small.values = "good")
 set.seed(1909)
@@ -278,7 +279,7 @@ netsplit(net3)
 #----Dropout severe adverse reactions
 pw4 <- pairwise(treat = t1, n = n, event = r_doae, studlab = ID, data = tol, sm = "OR", allstudies = T)
 net4 <- netmeta(TE, seTE, treat1, treat2, studlab, data = pw4,
-                common = FALSE, ref = "PBO")
+                common = FALSE, ref = "Pl")
 severeae_net <- netgraph(net4, plastic = FALSE, multiarm = FALSE, points = TRUE, seq = "optimal",
                          cex.points = table(tol$t1), col = 1, number.of.studies = TRUE,
                          pos.number.of.studies = 0.5)
@@ -288,7 +289,7 @@ forest(net4, label.left = "Favours active drug", label.right = "Favours placebo"
        Random, 95% CI")
 plot(net4)
 #To make all the contrasts
-plot(net4, ref = c("AMPH", "ATO", "BPR", "MPH", "PEM", "PBO"))
+plot(net4, ref = c("Am", "At", "Bu", "Me", "Pe", "Pl"))
 #Ranking treatments
 netrank(net4, small.values = "good")
 set.seed(1909)
@@ -304,7 +305,7 @@ netsplit(net4)
 #----N adverse effects
 pw5 <- pairwise(treat = t1, n = n, event = r_ae, studlab = ID, data = tol, sm = "OR")
 net5 <- netmeta(TE, seTE, treat1, treat2, studlab, data = pw5,
-                common = FALSE, ref = "PBO")
+                common = FALSE, ref = "Pl")
 ae_net <- netgraph(net5, plastic = FALSE, multiarm = FALSE, points = TRUE, seq = "optimal",
                    cex.points = table(tol$t1), col = 1, number.of.studies = TRUE,
                    pos.number.of.studies = 0.5)
@@ -314,7 +315,7 @@ forest(net5, label.left = "Favours active drug", label.right = "Favours placebo"
        Random, 95% CI")
 plot(net5)
 #To make all the contrasts
-plot(net5, ref = c("AMPH", "ATO", "BPR", "MPH", "PEM", "PBO"))
+plot(net5, ref = c("Am", "At", "Bu", "Me", "Pe", "Pl"))
 #Ranking treatments
 netrank(net5, small.values = "good")
 set.seed(1909)
